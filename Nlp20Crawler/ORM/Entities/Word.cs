@@ -18,7 +18,7 @@ namespace Nlp20Crawler.ORM.Entities
 
         public string Lang { get; set; }
 
-        public bool CrawlerMeaningCheckProposed { get; set; }
+        public bool? CrawlerMeaningCheckProposed { get; set; }
 
         public DateTime? CrawlerMeaningCheckProposedTime { get; set; }
 
@@ -29,5 +29,8 @@ namespace Nlp20Crawler.ORM.Entities
         public virtual ICollection<CsWordNounSpecification> CsWordsNounSpecificationPatternWord { get; set; }
         public virtual ICollection<CsWordNounSpecification> CsWordsNounSpecificationWord { get; set; }
         public virtual ICollection<WordMeaning> WordMeaning { get; set; }
+        public virtual ICollection<CsWordUniSpecification> CsWordLexemes { get; set; }
+        public virtual ICollection<CsWordUniSpecification> CsWordsUniSpecificationWord { get; set; }
+        public virtual ICollection<CrawlerWebsite> CrawlerWebsiteWord { get; set; }
     }
 }

@@ -50,6 +50,10 @@ namespace Nlp20Crawler.ORM.Context
                 entity.Property(e => e.Crawled)
                     .IsRequired()
                     .HasDefaultValue(false);
+                
+                entity.HasOne(d => d.Word)
+                    .WithMany(p => p.CrawlerWebsiteWord)
+                    .HasForeignKey(d => d.WordId);
             });
 
             modelBuilder.Entity<CsWordNounSpecification>(entity =>
@@ -75,6 +79,9 @@ namespace Nlp20Crawler.ORM.Context
                 entity.Property(e => e.VerifiedReliability)
                     .HasComment("0: absolutely not verified, 100: verified by professional human");
 
+                entity.Property(e => e.CrawlerProposedWiki)
+                    .HasComment("null: not checked by proposer, false: not proposed, true: proposed");
+
                 entity.HasOne(d => d.PatternWord)
                     .WithMany(p => p.CsWordsNounSpecificationPatternWord)
                     .HasForeignKey(d => d.PatternWordId);
@@ -96,11 +103,23 @@ namespace Nlp20Crawler.ORM.Context
                 entity.Property(e => e.IsNegative)
                     .HasComment("null: N/A / true: is negative / false: is positive");
 
-                entity.Property(e => e.WordId);
+                entity.Property(e => e.WordId)
+                    .IsRequired();
 
                 entity.Property(e => e.VerbalType)
                     .HasMaxLength(1)
                     .HasComment("0: interjection, 1 - 9: noun - adverb");
+
+                entity.Property(e => e.LemmaWordId)
+                    .HasComment("Word in basic representative form used for dictionaries.");
+
+                entity.HasOne(d => d.Word)
+                    .WithMany(p => p.CsWordsUniSpecificationWord)
+                    .HasForeignKey(d => d.WordId);
+
+                entity.HasOne(d => d.LemmaWord)
+                    .WithMany(p => p.CsWordLexemes)
+                    .HasForeignKey(d => d.LemmaWordId);
             });
 
             modelBuilder.Entity<Meaning>(entity =>
@@ -124,16 +143,12 @@ namespace Nlp20Crawler.ORM.Context
                 entity.Property(e => e.Text)
                     .IsRequired();
 
-                entity.Property(e => e.CrawlerMeaningCheckProposed);
-
-                entity.Property(e => e.CrawlerMeaningCheckProposedTime);
-
                 entity.Property(e => e.Probability)
                     .HasDefaultValue(0)
                     .IsRequired()
                     .HasComment("-100 - +100 (-100 means not possible, 100 means 100% probability)")
                     .HasMaxLength(3);
-                
+
                 entity.Property(e => e.OccurenceCount)
                     .HasDefaultValue(0)
                     .IsRequired();

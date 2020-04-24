@@ -2,8 +2,9 @@
 using Nlp20Crawler.Interfaces;
 using Nlp20Crawler.ORM.Context;
 
-namespace Nlp20Crawler.Threads
+namespace Nlp20Crawler.Threads.Scraper
 {
+    // Scrape information from downloaded websites
     public class ScraperThread : IThread<IOptions>
     {
         private PostgreSqlContext _context;

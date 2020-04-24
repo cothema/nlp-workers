@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Nlp20Crawler.Interfaces;
+using Nlp20Crawler.Threads.Crawler;
+using Nlp20Crawler.Threads.Proposer;
+using Nlp20Crawler.Threads.Scraper;
 
-namespace Nlp20Crawler.Threads
+namespace Nlp20Crawler.Threads.Main
 {
     public class MainThread : IThread<IOptions>
     {
@@ -29,7 +32,7 @@ namespace Nlp20Crawler.Threads
         public async Task Run(IOptions? options)
         {
             _logger.LogInformation("■ NLP20Workers started ■");
-
+            
             try
             {
                 var workers = new List<Task>

@@ -10,5 +10,7 @@ namespace Nlp20Crawler.ORM.Entities
         public DateTime? CrawledTimestamp { get; set; }
         public int? ResponseCode { get; set; }
         public string? Html { get; set; }
+        public int WordId { get; set; }
+        public virtual Word Word { get; set; }
     }
 }

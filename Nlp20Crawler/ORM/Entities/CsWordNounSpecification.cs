@@ -23,7 +23,7 @@
         public int? VerifiedReliability { get; set; }
         public int? PatternWordId { get; set; }
         public bool? Life { get; set; }
-
+        public bool? CrawlerProposedWiki { get; set; }
         public virtual Word PatternWord { get; set; }
         public virtual Word Word { get; set; }
     }

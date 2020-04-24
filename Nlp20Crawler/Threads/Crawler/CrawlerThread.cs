@@ -7,9 +7,9 @@ using Microsoft.Extensions.Logging;
 using Nlp20Crawler.Interfaces;
 using Nlp20Crawler.ORM.Context;
 using Nlp20Crawler.ORM.Entities;
-using Nlp20Crawler.Services.DownloadStrategies;
+using Nlp20Crawler.Threads.Crawler.DownloadStrategies;
 
-namespace Nlp20Crawler.Threads
+namespace Nlp20Crawler.Threads.Crawler
 {
     public class CrawlerThreadOptions : IOptions
     {

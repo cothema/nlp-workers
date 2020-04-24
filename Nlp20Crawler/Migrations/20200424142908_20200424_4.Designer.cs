@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Nlp20Crawler.ORM.Context;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Nlp20Crawler.Migrations
 {
     [DbContext(typeof(PostgreSqlContext))]
-    partial class PostgreSqlContextModelSnapshot : ModelSnapshot
+    [Migration("20200424142908_20200424_4")]
+    partial class _20200424_4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,19 +52,12 @@ namespace Nlp20Crawler.Migrations
                         .HasColumnName("url")
                         .HasColumnType("text");
 
-                    b.Property<int>("WordId")
-                        .HasColumnName("word_id")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id")
                         .HasName("pk_crawler_websites");
 
                     b.HasIndex("Id")
                         .IsUnique()
                         .HasName("ix_crawler_websites_id");
-
-                    b.HasIndex("WordId")
-                        .HasName("ix_crawler_websites_word_id");
 
                     b.ToTable("crawler_websites");
                 });
@@ -74,11 +69,6 @@ namespace Nlp20Crawler.Migrations
                         .HasColumnName("id")
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<bool?>("CrawlerProposedWiki")
-                        .HasColumnName("crawler_proposed_wiki")
-                        .HasColumnType("boolean")
-                        .HasComment("null: not checked by proposer, false: not proposed, true: proposed");
 
                     b.Property<bool?>("DeclensionPl1")
                         .HasColumnName("declension_pl1")
@@ -259,7 +249,7 @@ namespace Nlp20Crawler.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<bool?>("CrawlerMeaningCheckProposed")
+                    b.Property<bool>("CrawlerMeaningCheckProposed")
                         .HasColumnName("crawler_meaning_check_proposed")
                         .HasColumnType("boolean");
 
@@ -340,16 +330,6 @@ namespace Nlp20Crawler.Migrations
                         .HasName("ix_word_meaning_word_id");
 
                     b.ToTable("word_meaning");
-                });
-
-            modelBuilder.Entity("Nlp20Crawler.ORM.Entities.CrawlerWebsite", b =>
-                {
-                    b.HasOne("Nlp20Crawler.ORM.Entities.Word", "Word")
-                        .WithMany("CrawlerWebsiteWord")
-                        .HasForeignKey("WordId")
-                        .HasConstraintName("fk_crawler_websites_words_word_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Nlp20Crawler.ORM.Entities.CsWordNounSpecification", b =>

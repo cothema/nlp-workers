@@ -3,7 +3,7 @@ using System.Net;
 using Microsoft.Extensions.Logging;
 using Nlp20Crawler.ORM.Entities;
 
-namespace Nlp20Crawler.Services.DownloadStrategies
+namespace Nlp20Crawler.Threads.Crawler.DownloadStrategies
 {
     public class SimpleDownloadStrategy : IDownloadStrategy
     {

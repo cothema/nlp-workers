@@ -3,9 +3,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Nlp20Crawler.ORM.Context;
 using Nlp20Crawler.Services;
-using Nlp20Crawler.Services.DownloadStrategies;
-using Nlp20Crawler.Services.ScraperStrategies;
 using Nlp20Crawler.Threads;
+using Nlp20Crawler.Threads.Crawler;
+using Nlp20Crawler.Threads.Crawler.DownloadStrategies;
+using Nlp20Crawler.Threads.Main;
+using Nlp20Crawler.Threads.Proposer;
+using Nlp20Crawler.Threads.Proposer.ProposerStrategies;
+using Nlp20Crawler.Threads.Scraper;
+using Nlp20Crawler.Threads.Scraper.ScraperStrategies;
 
 namespace Nlp20Crawler
 {
@@ -36,6 +41,7 @@ namespace Nlp20Crawler
                 .AddSingleton<CrawlerThread>()
                 .AddSingleton<MainThread>()
                 .AddSingleton<ProposerThread>()
+                .AddSingleton<WikipediaCsNounProposeStrategy>()
                 .AddSingleton<ScraperThread>()
                 // Database
                 .AddSingleton<EntityManager>()

@@ -23,7 +23,7 @@ namespace Nlp20Crawler.ORM.Context
         }
 
         // Persist concrete entity to writer context
-        public async Task<object> Persist([NotNull] object entity)
+        public async Task<T> Persist<T>([NotNull] T entity)
         {
             await SemaphoreWriter.WaitAsync();
 
